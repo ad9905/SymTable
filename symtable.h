@@ -5,6 +5,7 @@
 
 #ifndef SymTable_INCLUDED
 #define SymTable_INCLUDED
+#include <stddef.h>
 
 /* A SymTable_T is a last-in-first-out collection of items. */
 
@@ -19,7 +20,7 @@ SymTable_T SymTable_new(void);
 
 /*--------------------------------------------------------------------*/
 
-  size_t SymTable_getLength(SymTable_T oSymTable);
+size_t SymTable_getLength(SymTable_T oSymTable);
 
 /* Free oSymTable. */
 
