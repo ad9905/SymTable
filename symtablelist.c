@@ -109,7 +109,7 @@ const char *pcKey, const void *pvValue)
       return 0;
    
    /* need to make space for defensive copy of the key */
-   psNewNode->pcKey = malloc(strlen(pcKey) + 1));
+   psNewNode->pcKey = malloc(strlen(pcKey) + 1);
 
    /* check for sufficient memory */
    if (psNewNode->pcKey == NULL)
@@ -143,7 +143,7 @@ void *SymTable_replace(SymTable_T oSymTable,
    {
       if (strcmp(pcKey, psCurrentNode->pcKey) == 0)
       {
-         oldValue = psCurrentNode->pvValue;
+         oldValue = (void*)psCurrentNode->pvValue;
          psCurrentNode->pvValue = pvValue;
          return oldValue;
       }
@@ -218,7 +218,7 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
       if (strcmp(pcKey, psCurrentNode->pcKey) == 0)
       {
          /* save the value */
-         oldValue = psCurrentNode->pvValue;
+         oldValue = (void*)psCurrentNode->pvValue;
          /* if else statement to change the links to remove the node */
          if (psPrevNode == NULL)
          {
