@@ -111,30 +111,32 @@ const char *pcKey, const void *pvValue)
    /* need to make space for defensive copy of the key */
    malloc(strlength(pcKey) + 1));
 
-   psNewNode->pvItem = pvItem;
+   psNewNode->pvValue = pvValue;
    psNewNode->psNextNode = oSymTable->psFirstNode;
    oSymTable->psFirstNode = psNewNode;
    return 1;
 }
 
-/*--------------------------------------------------------------------*/
 
+
+/*--------------------------------------------------------------------*/
+/*
 void *SymTable_pop(SymTable_T oSymTable)
 {
-   const void *pvItem;
+   const void *pvValue;
    struct SymTableNode *psNextNode;
 
    assert(oSymTable != NULL);
    assert(oSymTable->psFirstNode != NULL);
 
-   pvItem = oSymTable->psFirstNode->pvItem;
+   pvValue = oSymTable->psFirstNode->pvValue;
    psNextNode = oSymTable->psFirstNode->psNextNode;
    free(oSymTable->psFirstNode);
    oSymTable->psFirstNode = psNextNode;
-   return (void*)pvItem;
+   return (void*)pvValue;
 }
 
-/*--------------------------------------------------------------------*/
+/*--------------------------------------------------------------------
 
 int SymTable_isEmpty(SymTable_T oSymTable)
 {
@@ -142,11 +144,11 @@ int SymTable_isEmpty(SymTable_T oSymTable)
 
    return oSymTable->psFirstNode == NULL;
 }
-
+*/
 /*--------------------------------------------------------------------*/
 
 void SymTable_map(SymTable_T oSymTable,
-               void (*pfApply)(void *pvItem, void *pvExtra),
+               void (*pfApply)(void *pvValue, void *pvExtra),
                const void *pvExtra)
 {
    struct SymTableNode *psCurrentNode;
@@ -157,5 +159,5 @@ void SymTable_map(SymTable_T oSymTable,
    for (psCurrentNode = oSymTable->psFirstNode;
         psCurrentNode != NULL;
         psCurrentNode = psCurrentNode->psNextNode)
-      (*pfApply)((void*)psCurrentNode->pvItem, (void*)pvExtra);
+      (*pfApply)((void*)psCurrentNode->pvValue, (void*)pvExtra);
 }
