@@ -151,46 +151,106 @@ void *SymTable_replace(SymTable_T oSymTable,
 return NULL;
 }
 
+/*--------------------------------------------------------------------*/
 
-
-If oSymTable contains a binding with key pcKey, then 
-SymTable_replace must replace the binding's value with pvValue 
-and return the old value. Otherwise it must leave oSymTable unchanged and return NULL.
-
-
+int SymTable_contains(SymTable_T oSymTable, const char *pcKey)
+{
+   struct SymTableNode* psCurrentNode;
    
-
-/*--------------------------------------------------------------------*/
-/*
-void *SymTable_pop(SymTable_T oSymTable)
-{
-   const void *pvValue;
-   struct SymTableNode *psNextNode;
-
    assert(oSymTable != NULL);
-   assert(oSymTable->psFirstNode != NULL);
+   assert(pcKey != NULL);
 
-   pvValue = oSymTable->psFirstNode->pvValue;
-   psNextNode = oSymTable->psFirstNode->psNextNode;
-   free(oSymTable->psFirstNode);
-   oSymTable->psFirstNode = psNextNode;
-   return (void*)pvValue;
+/* WALK for loop */
+   for (psCurrentNode = oSymTable->psFirstNode;
+        psCurrentNode != NULL;
+      /* pcCurrentNode walks to it's OWN next node */
+        psCurrentNode = psCurrentNode->psNextNode)
+   {
+      if (strcmp(pcKey, psCurrentNode->pcKey) == 0)
+      {
+         return 1;
+      }
+   }
+return 0;
 }
 
-/*--------------------------------------------------------------------
-
-int SymTable_isEmpty(SymTable_T oSymTable)
-{
-   assert(oSymTable != NULL);
-
-   return oSymTable->psFirstNode == NULL;
-}
-*/
 /*--------------------------------------------------------------------*/
 
-void SymTable_map(SymTable_T oSymTable,
-               void (*pfApply)(void *pvValue, void *pvExtra),
-               const void *pvExtra)
+  void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
+{
+   struct SymTableNode* psCurrentNode;
+   
+   assert(oSymTable != NULL);
+   assert(pcKey != NULL);
+
+/* WALK for loop */
+   for (psCurrentNode = oSymTable->psFirstNode;
+        psCurrentNode != NULL;
+      /* pcCurrentNode walks to it's OWN next node */
+        psCurrentNode = psCurrentNode->psNextNode)
+   {
+      if (strcmp(pcKey, psCurrentNode->pcKey) == 0)
+      {
+        return (void*)psCurrentNode->pvValue;
+      }
+   }
+return NULL;
+}
+
+
+/*--------------------------------------------------------------------*/
+
+void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
+{
+   struct SymTableNode* psCurrentNode;
+   void *oldValue;
+   struct SymTableNode* psPrevNode = NULL;
+   
+   assert(oSymTable != NULL);
+   assert(pcKey != NULL);
+
+/* WALK for loop */
+   for (psCurrentNode = oSymTable->psFirstNode;
+        psCurrentNode != NULL;
+      /* pcCurrentNode walks to it's OWN next node */
+        psCurrentNode = psCurrentNode->psNextNode)
+   {
+      if (strcmp(pcKey, psCurrentNode->pcKey) == 0)
+      {
+         /* save the value */
+         oldValue = psCurrentNode->pvValue;
+         /* if else statement to change the links to remove the node */
+         if (psPrevNode == NULL)
+         {
+            /* sym tables first node skip current and go to current's next */
+            oSymTable->psFirstNode = psCurrentNode->psNextNode;
+         }
+         else 
+         {
+           /* previous node's next has to point to current node's next */
+            psPrevNode->psNextNode = psCurrentNode->psNextNode;
+         }
+         /* free the key and free the node */
+         free ((void*)psCurrentNode->pcKey);
+         free (psCurrentNode);
+         /* decrement count */
+         oSymTable->nodeQuantity--;
+         /* return value */
+         return oldValue;
+      }
+     /* move previous to become the current one */
+      psPrevNode = psCurrentNode;
+   }
+return NULL;
+}
+
+
+/*--------------------------------------------------------------------*/
+
+
+ void SymTable_map(SymTable_T oSymTable,
+     void (*pfApply)(const char *pcKey, void *pvValue, void *pvExtra),
+     const void *pvExtra)
 {
    struct SymTableNode *psCurrentNode;
 
@@ -200,5 +260,6 @@ void SymTable_map(SymTable_T oSymTable,
    for (psCurrentNode = oSymTable->psFirstNode;
         psCurrentNode != NULL;
         psCurrentNode = psCurrentNode->psNextNode)
-      (*pfApply)((void*)psCurrentNode->pvValue, (void*)pvExtra);
+      /* pfApply has three arguments, key, value, extra */ 
+      (*pfApply)(psCurrentNode->pcKey, (void*)psCurrentNode->pvValue, (void*)pvExtra);
 }
