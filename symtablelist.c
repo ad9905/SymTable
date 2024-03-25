@@ -94,7 +94,6 @@ void SymTable_free(SymTable_T oSymTable)
       free((char*)psCurrentNode->pcKey);
       free(psCurrentNode);
    }
-
    free(oSymTable);
 }
 
