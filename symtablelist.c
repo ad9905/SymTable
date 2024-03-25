@@ -109,15 +109,56 @@ const char *pcKey, const void *pvValue)
       return 0;
    
    /* need to make space for defensive copy of the key */
-   malloc(strlength(pcKey) + 1));
+   psNewNode->pcKey = malloc(strlen(pcKey) + 1));
 
+   /* check for sufficient memory */
+   if (psNewNode->pcKey == NULL)
+   {
+      free(psNewNode);
+      return 0;
+   }
+   oSymTable->nodeQuantity++;
    psNewNode->pvValue = pvValue;
    psNewNode->psNextNode = oSymTable->psFirstNode;
    oSymTable->psFirstNode = psNewNode;
    return 1;
 }
 
+/*--------------------------------------------------------------------*/
 
+void *SymTable_replace(SymTable_T oSymTable,
+     const char *pcKey, const void *pvValue)
+{
+   struct SymTableNode* psCurrentNode;
+   void *oldValue;
+
+   assert(oSymTable != NULL);
+   assert(pcKey != NULL);
+
+/* WALK for loop */
+   for (psCurrentNode = oSymTable->psFirstNode;
+        psCurrentNode != NULL;
+      /* pcCurrentNode walks to it's OWN next node */
+        psCurrentNode = psCurrentNode->psNextNode)
+   {
+      if (strcmp(pcKey, psCurrentNode->pcKey) == 0)
+      {
+         oldValue = psCurrentNode->pvValue;
+         psCurrentNode->pvValue = pvValue;
+         return oldValue;
+      }
+   }
+return NULL;
+}
+
+
+
+If oSymTable contains a binding with key pcKey, then 
+SymTable_replace must replace the binding's value with pvValue 
+and return the old value. Otherwise it must leave oSymTable unchanged and return NULL.
+
+
+   
 
 /*--------------------------------------------------------------------*/
 /*
