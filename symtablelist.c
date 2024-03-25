@@ -56,6 +56,26 @@ SymTable_T SymTable_new(void)
 
 /*--------------------------------------------------------------------*/
 
+
+size_t SymTable_getLength(SymTable_T oSymTable)
+{
+   struct SymTableNode* psCurrentNode;
+   
+   assert(oSymTable != NULL);
+
+/* WALK for loop */
+   for (psCurrentNode = oSymTable->psFirstNode;
+        psCurrentNode != NULL;
+      /* pcCurrentNode walks to it's OWN next node */
+        psCurrentNode = psCurrentNode->psNextNode)
+   {
+      oSymTable-> nodeQuantity++;
+   }   
+return oSymTable-> nodeQuantity;
+}
+
+/*--------------------------------------------------------------------*/
+
 void SymTable_free(SymTable_T oSymTable)
 {
    struct SymTableNode *psCurrentNode;
@@ -244,9 +264,7 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
 return NULL;
 }
 
-
 /*--------------------------------------------------------------------*/
-
 
  void SymTable_map(SymTable_T oSymTable,
      void (*pfApply)(const char *pcKey, void *pvValue, void *pvExtra),
