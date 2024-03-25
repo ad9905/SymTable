@@ -25,10 +25,10 @@ void SymTable_free(SymTable_T oSymTable);
 
 /*--------------------------------------------------------------------*/
 
-/* Push pvItem onto oSymTable.  Return 1 (TRUE) if successful, or 0
+/* Put pvItem onto oSymTable.  Return 1 (TRUE) if successful, or 0
    (FALSE) if insufficient memory is available. */
 
-int SymTable_push(SymTable_T oSymTable, const void *pvItem);
+int SymTable_put(SymTable_T oSymTable, const void *pvItem);
 
 /*--------------------------------------------------------------------*/
 
