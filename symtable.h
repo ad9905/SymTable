@@ -31,27 +31,38 @@ void SymTable_free(SymTable_T oSymTable);
 /* Put pvItem onto oSymTable.  Return 1 (TRUE) if successful, or 0
    (FALSE) if insufficient memory is available. */
 
-  int SymTable_put(SymTable_T oSymTable,
-     const char *pcKey, const void *pvValue);
+int SymTable_put(SymTable_T oSymTable,
+   const char *pcKey, const void *pvValue);
 
 /*--------------------------------------------------------------------*/
 
-  void *SymTable_replace(SymTable_T oSymTable,
-     const char *pcKey, const void *pvValue);
+void *SymTable_replace(SymTable_T oSymTable,
+   const char *pcKey, const void *pvValue);
 
-  int SymTable_contains(SymTable_T oSymTable, const char *pcKey);
+/*--------------------------------------------------------------------*/
 
-  void *SymTable_get(SymTable_T oSymTable, const char *pcKey);
+int SymTable_contains(SymTable_T oSymTable, const char *pcKey);
 
-  void *SymTable_remove(SymTable_T oSymTable, const char *pcKey);
+/*--------------------------------------------------------------------*/
+
+void *SymTable_get(SymTable_T oSymTable, const char *pcKey);
+
+/*--------------------------------------------------------------------*/
+
+void *SymTable_remove(SymTable_T oSymTable, const char *pcKey);
+
+/*--------------------------------------------------------------------*/
 
 /* Apply function *pfApply to each element of oSymTable, passing
    pvExtra as an extra argument.  That is, for each element pvItem
    of oSymTable, call (*pfApply)(pvItem, pvExtra). */
 
-  void SymTable_map(SymTable_T oSymTable,
-     void (*pfApply)(const char *pcKey, void *pvValue, void *pvExtra),
-     const void *pvExtra);
+void SymTable_map(SymTable_T oSymTable,
+   void (*pfApply)(const char *pcKey, void *pvValue, void *pvExtra),
+   const void *pvExtra);
+
+/*--------------------------------------------------------------------*/
+
 
 #endif
 
