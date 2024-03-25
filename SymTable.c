@@ -67,7 +67,7 @@ void SymTable_free(SymTable_T oSymTable)
 
 /*--------------------------------------------------------------------*/
 
-int SymTable_push(SymTable_T oSymTable, const void *pvItem)
+int SymTable_put(SymTable_T oSymTable, const void *pvItem)
 {
    struct SymTableNode *psNewNode;
 
