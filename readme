@@ -68,15 +68,21 @@ write "None."
    symtablelist.c: line 95: medium priority:
    Do you want to validate 'pvValue' through an assert?
 
-   No, because SymTable_put doesn't require pvValue to be any type or value
-apart from a const void *, a generic pointer type,
-and therefore it is the responsibility of the caller to provide a 
-valid pointer. 
+   No, because SymTable_put doesn't require pvValue to be any type or 
+value apart from a const void *, a generic pointer type. pvValue could be
+NULL and it wouldn't effect the SymTable_put's function, as the
+Nodes (bindings) don't inherently have to have non-NULL values within. They 
+just need keys and pointers to the next node. 
 
    symtablelist.c: line 144: medium priority:
    Do you want to validate 'pvValue' through an assert?
-Similarly to SymTable_put, SymTable_replace doesn't have requirements
-for the type or value of pvValue other than being a const void *.
+
+   Similarly to SymTable_put, SymTable_replace doesn't have requirements
+for the type or value of pvValue other than being a const void *. Nodes 
+(bindings) don't inherently have to have non-NULL values within. They 
+just need keys and pointers to the next node. 
+
+
 
 
    No, because my replace function does not rely on pvValue (which
