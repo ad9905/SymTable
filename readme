@@ -3,7 +3,7 @@ Assignment 3 readme File
 ------------------------------------------------------------------------
 What is your name?
 
-
+Anh Dao
 
 ------------------------------------------------------------------------
 What authorized sources of information did you use to complete the
@@ -12,6 +12,12 @@ in the "Policies" web page (also available on armlab in the file
 ~cos217/AuthorizedSourcesList ) to this section of the readme file,
 and edit it as appropriate.
 
+The course's lectures.
+The course's precepts.
+The course's website.
+Documents that are referenced directly by the course's website. Such documents include the course's lecture slides and precept handouts.
+The course's current staff members outside of class time through office hours.
+Current Intro Lab TAs through visits to the Intro COS Lab.
 
 
 ------------------------------------------------------------------------
@@ -26,12 +32,14 @@ interaction, may additionally require the interaction being reported
 to the Committee on Discipline. Write "None" if you used no
 unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 What is your assessment of the assignment? Was it helpful? Was it fun?
 
-
+Not painful if I went to office hours and had the concepts clarified.
+Fun once I started understanding the node data structure and got to
+refresh linked lists from COS126.
 
 ------------------------------------------------------------------------
 (optional) What information can you provide about your submission that
@@ -46,7 +54,7 @@ disagreements with them? Copy the splint warnings here, and express your
 disagreement after each warning. If there are no warnings, then write
 "None."
 
-
+None
 
 ------------------------------------------------------------------------
 What warnings does critTer generate on symtablelist.c, and what are your
@@ -54,7 +62,68 @@ disagreements with them? Copy the critTer warnings here, and express
 your disagreement after each warning. If there are no warnings, then
 write "None."
 
+   symtable.h: line 21: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'oSymTable'
 
+   symtable.h: line 21: high priority: 
+   A function's comment should state explicitly what the function returns
+
+   symtable.h: line 31: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'pcKey'
+
+   symtable.h: line 31: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'pvValue'
+
+   symtable.h: line 37: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'oSymTable'
+
+   symtable.h: line 37: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'pcKey'
+
+   symtable.h: line 37: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'pvValue'
+
+   symtable.h: line 42: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'oSymTable'
+
+   symtable.h: line 42: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'pcKey'
+
+   symtable.h: line 42: high priority: 
+   A function's comment should state explicitly what the function returns
+
+   symtable.h: line 46: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'oSymTable'
+
+   symtable.h: line 46: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'pcKey'
+
+   symtable.h: line 50: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'oSymTable'
+
+   symtable.h: line 50: high priority: 
+   A function's comment should refer to each parameter by name;
+   your comment does not refer to 'pcKey'
+
+   symtablelist.c: line 106: medium priority:
+   Do you want to validate 'pvValue' through an assert?
+
+   symtablelist.c: line 159: medium priority:
+   Do you want to validate 'pvValue' through an assert?
+
+   symtablelist.c: line 293: medium priority:
+   Do you want to validate 'pvExtra' through an assert?
 
 ------------------------------------------------------------------------
 What warnings does splint generate on symtablehash.c, and what are your
