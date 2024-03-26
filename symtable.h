@@ -25,13 +25,15 @@ size_t SymTable_getLength(SymTable_T oSymTable);
 void SymTable_free(SymTable_T oSymTable);
 
 /* Returns 1 (TRUE) if oSymTable does not contain a binding with
-key pcKey. Returns 0 (FALSE) if either there is insufficient memory
-or oSymTable contains any binding with key pcKey. */
+key pcKey. Returns 0 (FALSE) if either there is insufficient 
+memoryor oSymTable contains any binding with key pcKey. pvValue
+stores value of previous node. */
 
 int SymTable_put(SymTable_T oSymTable,
    const char *pcKey, const void *pvValue);
 
-/* In the bindings of oSymTable with a key equal to pcKey, replace 
+/* pvValue stores value of previous node.
+In the bindings of oSymTable with a key equal to pcKey, replace 
 the binding's value and RETURN the previous value. Otherwise,
 return NULL, table remains unchanged. */
 
