@@ -86,8 +86,8 @@ void SymTable_free(SymTable_T oSymTable)
    {
       psNextNode = psCurrentNode->psNextNode;
       
-      /* free the current node's key,
-      const char stars are protected, must cast as plain char star to free. */
+   /* free the current node's key, const char stars are protected,
+   must cast as plain char star to free. */
       free((char*)psCurrentNode->pcKey);
       free(psCurrentNode);
    }
@@ -122,9 +122,11 @@ const char *pcKey, const void *pvValue)
       }
    }
    
-   /* in the case that there are no duplicates, make space and put in a new node */
+   /* in the case that there are no duplicates, make space 
+   and put in a new node */
    
-   psNewNode = (struct SymTableNode*)malloc(sizeof(struct SymTableNode));
+   psNewNode = (struct SymTableNode*)
+      malloc(sizeof(struct SymTableNode));
    if (psNewNode == NULL)
       return 0;
    
@@ -242,17 +244,17 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
    {
       if (strcmp(pcKey, psCurrentNode->pcKey) == 0)
       {
-         /* save the value */
+      /* save the value */
          oldValue = (void*)psCurrentNode->pvValue;
-         /* if else statement to change the links to remove the node */
+      /* if else statement to change the links to remove the node */
          if (psPrevNode == NULL)
          {
-            /* sym tables first node skip current and go to current's next */
+      /* sym tables first node skip current and go to current's next */
             oSymTable->psFirstNode = psCurrentNode->psNextNode;
          }
          else 
          {
-           /* previous node's next has to point to current node's next */
+      /* previous node's next has to point to current node's next */
             psPrevNode->psNextNode = psCurrentNode->psNextNode;
          }
          /* free the key and free the node */
@@ -284,5 +286,7 @@ return NULL;
         psCurrentNode != NULL;
         psCurrentNode = psCurrentNode->psNextNode)
       /* pfApply has three arguments, key, value, extra */ 
-      (*pfApply)(psCurrentNode->pcKey, (void*)psCurrentNode->pvValue, (void*)pvExtra);
+      (*pfApply)(psCurrentNode->pcKey, 
+         (void*)psCurrentNode->pvValue, 
+         (void*)pvExtra);
 }
