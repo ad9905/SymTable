@@ -131,7 +131,7 @@ disagreements with them? Copy the splint warnings here, and express your
 disagreement after each warning. If there are no warnings, then write
 "None."
 
-
+None (didn't attempt)
 
 ------------------------------------------------------------------------
 What warnings does critTer generate on symtablehash.c, and what are your
@@ -139,7 +139,7 @@ disagreements with them? Copy the critTer warnings here, and express
 your disagreement after each warning. If there are no warnings, then
 write "None."
 
-
+None (didn't attempt)
 
 ------------------------------------------------------------------------
 What are the CPU times reported by testsymtable.c with binding counts
