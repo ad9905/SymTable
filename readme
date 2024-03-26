@@ -68,12 +68,16 @@ write "None."
    symtablelist.c: line 95: medium priority:
    Do you want to validate 'pvValue' through an assert?
 
-   No, because my put function does not rely on pvValue (which
-stores the previous value of a node) to put in a new 
-node in the case that there are no duplicates.
+   No, because SymTable_put doesn't require pvValue to be any type or value
+apart from a const void *, a generic pointer type,
+and therefore it is the responsibility of the caller to provide a 
+valid pointer. 
 
    symtablelist.c: line 144: medium priority:
    Do you want to validate 'pvValue' through an assert?
+Similarly to SymTable_put, SymTable_replace doesn't have requirements
+for the type or value of pvValue other than being a const void *.
+
 
    No, because my replace function does not rely on pvValue (which
 stores the previous value of a node) to put in a new 
