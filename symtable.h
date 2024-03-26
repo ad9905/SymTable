@@ -7,60 +7,60 @@
 #define SymTable_INCLUDED
 #include <stddef.h>
 
-/* A SymTable_T is a last-in-first-out collection of items. */
+/* Declare ADT SymTable */
 
 typedef struct SymTable *SymTable_T;
 
-/* Return a new SymTable_T object, or NULL if insufficient memory is
-   available. */
+/* Returns a SymTable containing no bindings. Returns NULL if
+memory is insufficient. */
 
 SymTable_T SymTable_new(void);
 
-/*  */
+/* Takes in oSymTable, returns its number of bindings. */
 
 size_t SymTable_getLength(SymTable_T oSymTable);
 
-/* Free oSymTable. */
+/* Takes in oSymTable and frees all the memory that it occupies. */
 
 void SymTable_free(SymTable_T oSymTable);
 
-/*--------------------------------------------------------------------*/
-
-/* Put pvItem onto oSymTable.  Return 1 (TRUE) if successful, or 0
-   (FALSE) if insufficient memory is available. */
+/* Returns 1 (TRUE) if oSymTable does not contain a binding with
+key pcKey. Returns 0 (FALSE) if either there is insufficient memory
+or oSymTable contains any binding with key pcKey. */
 
 int SymTable_put(SymTable_T oSymTable,
    const char *pcKey, const void *pvValue);
 
-/*--------------------------------------------------------------------*/
+/* In the bindings of oSymTable with a key equal to pcKey, replace 
+the binding's value and RETURN the previous value. Otherwise,
+return NULL, table remains unchanged. */
 
 void *SymTable_replace(SymTable_T oSymTable,
    const char *pcKey, const void *pvValue);
 
-/*--------------------------------------------------------------------*/
+/* Returns 1(TRUE) if oSymTable contains a binding with a key
+equal to pcKey. Otherwise return 0(FALSE). */
 
 int SymTable_contains(SymTable_T oSymTable, const char *pcKey);
 
-/*--------------------------------------------------------------------*/
+/* Returns the value of the binding within oSymTable with a key equal
+to pcKey. Otherwise return NULL. */
 
 void *SymTable_get(SymTable_T oSymTable, const char *pcKey);
 
-/*--------------------------------------------------------------------*/
+/* Removes bindings in oSymTable with key == pcKey and RETURNS
+their value. Otherwise, return NULL and leave oSymTable 
+untouched. */
 
 void *SymTable_remove(SymTable_T oSymTable, const char *pcKey);
 
-/*--------------------------------------------------------------------*/
-
-/* Apply function *pfApply to each element of oSymTable, passing
-   pvExtra as an extra argument.  That is, for each element pvItem
-   of oSymTable, call (*pfApply)(pvItem, pvExtra). */
+/* Applies function *pfApply to each binding in SymTable, passing
+pvExtra and calling (*pfApply)(pcKey, pvValue, pvExtra) for 
+each pcKey/pvValue binding in oSymTable. */
 
 void SymTable_map(SymTable_T oSymTable,
    void (*pfApply)(const char *pcKey, void *pvValue, void *pvExtra),
    const void *pvExtra);
-
-/*--------------------------------------------------------------------*/
-
 
 #endif
 
