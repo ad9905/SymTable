@@ -17,7 +17,7 @@ node. SymTableNodes form a singly linked list.
 struct SymTableNode
 {
    /* The key */
-   const char *pcKey;
+   char *pcKey;
 
    /* The value. */
    const void *pvValue;
@@ -63,18 +63,9 @@ SymTable_T SymTable_new(void)
 
 size_t SymTable_getLength(SymTable_T oSymTable)
 {
-   struct SymTableNode* psCurrentNode;
    
    assert(oSymTable != NULL);
 
-/* WALK for loop */
-   for (psCurrentNode = oSymTable->psFirstNode;
-        psCurrentNode != NULL;
-      /* pcCurrentNode walks to it's OWN next node */
-        psCurrentNode = psCurrentNode->psNextNode)
-   {
-      oSymTable-> nodeQuantity++;
-   }   
 return oSymTable-> nodeQuantity;
 }
 
@@ -146,6 +137,7 @@ const char *pcKey, const void *pvValue)
       free(psNewNode);
       return 0;
    }
+   strcpy(psNewNode->pcKey, pcKey);
    oSymTable->nodeQuantity++;
    psNewNode->pvValue = pvValue;
    psNewNode->psNextNode = oSymTable->psFirstNode;
