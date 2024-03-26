@@ -15,8 +15,11 @@ and edit it as appropriate.
 The course's lectures.
 The course's precepts.
 The course's website.
-Documents that are referenced directly by the course's website. Such documents include the course's lecture slides and precept handouts.
-The course's current staff members outside of class time through office hours.
+Documents that are referenced directly by the course's website. 
+   Such documents include the course's lecture slides and 
+   precept handouts.
+The course's current staff members outside of class time 
+   through office hours.
 Current Intro Lab TAs through visits to the Intro COS Lab.
 
 
@@ -79,9 +82,10 @@ node in the case that there are no duplicates.
    symtablelist.c: line 264: medium priority:
    Do you want to validate 'pvExtra' through an assert?
 
-   No, because pvExtra is merely an extra parameter and no necessary
-to the function of "map".
-
+   In SymTable_map, pvExtra is an additional parameter to be used
+as data for map. Asserting that pvExtra is not NULL would 
+unnecessarily restrict this function because pvExtra is 
+optional. It's reasonable to allow it to be NULL.
 ------------------------------------------------------------------------
 What warnings does splint generate on symtablehash.c, and what are your
 disagreements with them? Copy the splint warnings here, and express your
