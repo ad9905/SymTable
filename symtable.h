@@ -11,14 +11,12 @@
 
 typedef struct SymTable *SymTable_T;
 
-/*--------------------------------------------------------------------*/
-
 /* Return a new SymTable_T object, or NULL if insufficient memory is
    available. */
 
 SymTable_T SymTable_new(void);
 
-/*--------------------------------------------------------------------*/
+/*  */
 
 size_t SymTable_getLength(SymTable_T oSymTable);
 
