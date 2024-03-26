@@ -10,7 +10,8 @@
 
 /*--------------------------------------------------------------------*/
 
-/* Each item is stored in a SymTableNode.  SymTableNodes are linked to
+/* SymTableNodes consist of keys, values, and the address of the next
+node. SymTableNodes form a singly linked list.
    form a list.  */
 
 struct SymTableNode
@@ -28,7 +29,7 @@ struct SymTableNode
 /*--------------------------------------------------------------------*/
 
 /* A SymTable is a "dummy" node that points to the first SymTableNode. 
-This is the managing structure - needs two fields */
+This is the managing structure - only needs two fields */
 
 struct SymTable
 {
@@ -41,6 +42,8 @@ struct SymTable
 
 /*--------------------------------------------------------------------*/
 
+/* Returns a SymTable containing no bindings. Returns NULL if
+memory is insufficient. */
 SymTable_T SymTable_new(void)
 {
    SymTable_T oSymTable;
@@ -56,6 +59,7 @@ SymTable_T SymTable_new(void)
 
 /*--------------------------------------------------------------------*/
 
+/* Takes in oSymTable, returns its number of bindings. */
 
 size_t SymTable_getLength(SymTable_T oSymTable)
 {
@@ -75,6 +79,8 @@ return oSymTable-> nodeQuantity;
 }
 
 /*--------------------------------------------------------------------*/
+
+/* Takes in oSymTable and frees all the memory that it occupies. */
 
 void SymTable_free(SymTable_T oSymTable)
 {
@@ -98,6 +104,10 @@ void SymTable_free(SymTable_T oSymTable)
 }
 
 /*--------------------------------------------------------------------*/
+
+/* Returns 1 (TRUE) if oSymTable does not contain a binding with
+key pcKey. Returns 0 (FALSE) if either there is insufficient memory
+or oSymTable contains any binding with key pcKey. */
 
 int SymTable_put(SymTable_T oSymTable, 
 const char *pcKey, const void *pvValue)
@@ -144,6 +154,10 @@ const char *pcKey, const void *pvValue)
 }
 
 /*--------------------------------------------------------------------*/
+
+/* In the bindings of oSymTable with a key equal to pcKey, replace 
+the binding's value and RETURN the previous value. Otherwise,
+return NULL, table remains unchanged. */
 
 void *SymTable_replace(SymTable_T oSymTable,
      const char *pcKey, const void *pvValue)
